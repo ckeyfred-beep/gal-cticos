@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALACTICO | Streetwear Editorial</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;700;800&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>ENVÍO GRATIS EN COMPRAS SUPERIORES A $150</span>
+            <span>•</span>
+            <span>NUEVA COLECCIÓN DISPONIBLE</span>
+            <span>•</span>
+            <span>ENVÍO GRATIS EN COMPRAS SUPERIORES A $150</span>
+            <span>•</span>
+            <span>NUEVA COLECCIÓN DISPONIBLE</span>
+            <span>•</span>
+        </div>
+    </div>
+
+    <header class="navbar">
+        <button class="menu-btn" onclick="abrirMenu()" aria-label="Menú">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <a href="#" class="logo">GALACTICO</a>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+            <button class="cart-btn" onclick="abrirCarrito()" aria-label="Carrito">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span id="cart-count" class="badge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1000&auto=format&fit=crop" alt="GALACTICO Colección" class="hero-img">
+        </div>
+        <div class="hero-text">
+            <h1 class="reveal">NUEVA<br>ERA</h1>
+            <p class="hero-sub reveal">LAS MEJORES ROPAS EN UN SOLO LUGAR</p>
+            <a href="#catalogo" class="btn-primary reveal">EXPLORAR COLECCIÓN</a>
+        </div>
+    </section>
+
+    <section id="catalogo" class="catalog-section">
+        <div class="section-header">
+            <h2 class="section-title">CATÁLOGO</h2>
+            <div class="filters" id="filters">
+                <button class="filter-btn active" data-filter="all">TODOS</button>
+                <button class="filter-btn" data-filter="hombre">HOMBRE</button>
+                <button class="filter-btn" data-filter="mujer">MUJER</button>
+                <button class="filter-btn" data-filter="accesorios">ACCESORIOS</button>
+            </div>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
+    </section>
+
+    <div class="overlay" id="menu-overlay" onclick="cerrarMenu(); cerrarCarrito();"></div>
+
+    <aside class="sidebar" id="menu-sidebar">
+        <div class="sidebar-header">
+            <h3>GALACTICO</h3>
+            <button class="icon-btn" onclick="cerrarMenu()" aria-label="Cerrar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="menu-links">
+            <a href="#" onclick="cerrarMenu()">INICIO</a>
+            <a href="#catalogo" onclick="cerrarMenu()">TIENDA</a>
+            <a href="#" onclick="abrirWhatsAppSoporte(); cerrarMenu();">CONTACTO</a>
+        </div>
+    </aside>
+
+    <aside class="sidebar cart-sidebar" id="cart-sidebar">
+        <div class="sidebar-header">
+            <h3>TU BOLSA</h3>
+            <button class="icon-btn" onclick="cerrarCarrito()" aria-label="Cerrar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="delivery-option">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="delivery-check" onchange="actualizarCarrito()">
+                    <span class="checkmark"></span>
+                    REQUIERO DELIVERY / ENVÍO
+                </label>
+            </div>
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn-checkout" id="checkout-btn">FINALIZAR POR WHATSAPP</button>
+        </div>
+    </aside>
+
+    <div id="product-modal" class="product-modal">
+        <div class="product-modal-overlay" onclick="cerrarModalProducto()"></div>
+        <div class="product-modal-content">
+            <button class="close-modal" onclick="cerrarModalProducto()" aria-label="Cerrar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-gallery" id="modal-gallery"></div>
+            <div class="modal-info">
+                <div class="modal-header-info">
+                    <h2 id="modal-nombre"></h2>
+                    <p id="modal-precio" class="modal-precio"></p>
+                </div>
+                <p id="modal-descripcion" class="modal-descripcion"></p>
+                <div class="modal-size-selector">
+                    <label>TALLA</label>
+                    <select id="modal-talla"></select>
+                </div>
+                <button class="btn-add-modal" onclick="agregarDesdeModal()">AÑADIR A LA BOLSA</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <!-- CONEXIÓN A FIREBASE LIMPIA (SIN CHAT) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4sjHQ6jQ5pTzO1Oo1BKc65Bmd8JcLFeU",
+            authDomain: "hola-a2613.firebaseapp.com",
+            projectId: "hola-a2613",
+            storageBucket: "hola-a2613.firebasestorage.app",
+            messagingSenderId: "461736119740",
+            appId: "1:461736119740:web:b9e06504a8d2595c546fb9"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        window.db = db;
+        window.dbFunctions = { collection, getDocs };
+        
+        window.dispatchEvent(new Event('firebaseReady'));
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
